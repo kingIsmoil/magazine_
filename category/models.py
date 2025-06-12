@@ -1,5 +1,5 @@
 from django.db import models
-
+from Accounts_user.models import User
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField(null=True)
@@ -22,6 +22,7 @@ class Subcategory(models.Model):
     
 
 class Product(models.Model):
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE)
     subcategory_id = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name='products')
     title = models.CharField(max_length=100)
     description = models.TextField(null=True)
